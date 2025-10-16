@@ -1,4 +1,4 @@
-var apiKey = 'your_api_key_here'; // put your api key here
+var apiKey = 'your_api_key_here'; 
 
 function fetchWeather(city) {
     var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric';
@@ -20,12 +20,12 @@ function displayWeather(data) {
 }
 
 function celsiusToFahrenheit(celsius) {
-    // convert to fahrenheit
+    
     return (celsius * 9 / 5) + 32;
 }
 
 function getHumidityComfort(humidity) {
-    // check humidity level
+    
     if (humidity < 30) {
         return 'Dry';
     } else if (humidity < 60) {
@@ -35,5 +35,4 @@ function getHumidityComfort(humidity) {
     }
 }
 
-// test it out
 fetchWeather('London').then(displayWeather);
