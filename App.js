@@ -1,5 +1,39 @@
-function greet() {
-    console.log('Hello from Feature 2!');
+var apiKey = 'your_api_key_here'; // put your api key here
+
+function fetchWeather(city) {
+    var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric';
+
+    return fetch(url).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        return data;
+    }).catch(function (error) {
+        console.log('Error getting weather:', error);
+    });
 }
 
-greet();
+function displayWeather(data) {
+    console.log('Weather in ' + data.name + ':');
+    console.log('Temperature: ' + data.main.temp + '°C (' + celsiusToFahrenheit(data.main.temp) + '°F)');
+    console.log('Humidity: ' + data.main.humidity + '% (Comfort level: ' + getHumidityComfort(data.main.humidity) + ')');
+    console.log('Description: ' + data.weather[0].description);
+}
+
+function celsiusToFahrenheit(celsius) {
+    // convert to fahrenheit
+    return (celsius * 9 / 5) + 32;
+}
+
+function getHumidityComfort(humidity) {
+    // check humidity level
+    if (humidity < 30) {
+        return 'Dry';
+    } else if (humidity < 60) {
+        return 'Comfortable';
+    } else {
+        return 'Humid';
+    }
+}
+
+// test it out
+fetchWeather('London').then(displayWeather);
